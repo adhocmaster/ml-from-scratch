@@ -32,8 +32,9 @@ def imshow(image, ax=None, title=None, normalize=True):
     """Imshow for Tensor."""
     if ax is None:
         fig, ax = plt.subplots()
-    image = image.numpy().transpose((1, 2, 0))
-
+    # image = image.numpy().transpose((1, 2, 0))
+    image = image.numpy().transpose((1, 2, 0)) ## channel goes last, 
+    # image = image.numpy()
     if normalize:
         mean = np.array([0.485, 0.456, 0.406])
         std = np.array([0.229, 0.224, 0.225])

@@ -1,5 +1,7 @@
 import numpy as np
 import numpy.typing as npt
+from typing import *
+import matplotlib.pyplot as plt
 
 def apply2DConvolutionOnChannel(imgChannel: npt.NDArray, kernel: npt.NDArray, stride: int = 1, padding: int = 0):
 
@@ -23,9 +25,9 @@ def apply2DConvolutionOnChannel(imgChannel: npt.NDArray, kernel: npt.NDArray, st
 
 def apply2DConvolution(img: npt.NDArray, kernel: npt.NDArray, stride: int = 1, padding: int = 0):
     if img.shape[-1] == 3:
-        r = img1[:, :, 0]
-        g = img1[:, :, 1]
-        b = img1[:, :, 2]
+        r = img[:, :, 0]
+        g = img[:, :, 1]
+        b = img[:, :, 2]
         return np.stack([
             apply2DConvolutionOnChannel(r, kernel),
             apply2DConvolutionOnChannel(g, kernel),
@@ -39,4 +41,10 @@ def juxtapose(img1: npt.NDArray, img2: npt.NDArray):
     fig, axes = plt.subplots(1, 2)
     axes[0].imshow(img1)
     axes[1].imshow(img2)
+    plt.show()
+    
+def juxtaposeAll(imgs: List[npt.NDArray]):
+    fig, axes = plt.subplots(1, len(imgs))
+    for i in range(len(imgs)):
+        axes[i].imshow(imgs[i])
     plt.show()
